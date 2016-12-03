@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:body>
+	    <h1>Cadastrar Notas Alunos</h1>
+		
+		<h:form  id="notas">
+			<fieldset>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="id: " for="id" style="display:none;"/>
+					<h:inputText id="id" value="#{notaBean.nota.id}" style="display:none;"/>
+					
+					<h:outputLabel value="Aluno: " for="aluno"/>
+					<h:selectOneMenu value="#{notaBean.nota.id_aluno}">
+    					<f:selectItem itemLabel="Selecione um aluno" itemValue="0" />
+    					<f:selectItems value="#{notaBean.alunos}" var="o" itemLabel="#{o.nome}" itemValue="#{o}"/>
+					</h:selectOneMenu>
+					
+					<h:outputLabel value="Disciplina: " for="disciplina"/>
+					<h:selectOneMenu value="#{notaBean.nota.id_disciplina}">
+    					<f:selectItem itemLabel="Selecione uma disciplina" itemValue="0" />
+    					<f:selectItems value="#{notaBean.disciplinas}" var="o" itemLabel="#{o.nome}" itemValue="#{o}" />
+					</h:selectOneMenu>
+										
+					<h:outputLabel value="Nota: " for="nota"/>
+					<h:inputText id="nota" value="#{notaBean.nota.nota_aluno}" />
+					
+					<h:commandButton value="Enviar" action="#{notaBean.gravarNota}" />
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+		
+		
+		<h:form id="formTabelaNotas">
+				<h:dataTable value="#{notaBean.notas}" var="gestaonota" id="tabelaNotas">
+					<h:column>
+						<f:facet name="header">Matrícula aluno</f:facet>
+						<h:outputText value="#{gestaonota.aluno.matricula}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Nome aluno</f:facet>
+						<h:outputText value="#{gestaonota.aluno.nome}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Código disciplina</f:facet>
+						<h:outputText value="#{gestaonota.disciplina.cod_disciplina}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Nome disciplina</f:facet>
+						<h:outputText value="#{gestaonota.disciplina.nome}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Nota</f:facet>
+						<h:outputText value="#{gestaonota.nota.nota_aluno}" />
+					</h:column>
+					
+					
+					<h:column>
+						<f:facet name="header">Alterar</f:facet>
+						<h:commandLink value="altera" action="#{notaBean.carregar(gestaonota)}"/>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Remover</f:facet>
+						<h:commandLink value="remove" action="#{notaBean.remover(gestaonota)}"/>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		
+	</h:body>
+</html>

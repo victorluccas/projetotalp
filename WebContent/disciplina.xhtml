@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:body>
+	    <h1>Cadastrar Discíplina</h1>
+		<h:form>
+			<fieldset>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="id: " for="id" style="display:none;"/>
+					<h:inputText id="id" value="#{disciplinaBean.disciplina.id}" style="display:none;"/>
+					<h:outputLabel value="Nome da Discíplina: " for="nome"/>
+					<h:inputText id="nome" value="#{disciplinaBean.disciplina.nome}"/>
+					<h:outputLabel value="Código da Discíplina" for="cod_disciplina" />
+					<h:inputText id="cod_disciplina" value="#{disciplinaBean.disciplina.cod_disciplina}" />
+					
+					<h:commandButton value="Enviar" action="#{disciplinaBean.gravarDisciplina}" />
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+		
+		<h:form id="formTabelaDisciplina">
+				<h:dataTable value="#{disciplinaBean.disciplinas}" var="disciplina" id="tabelaDisciplinas">
+					<h:column>
+						<f:facet name="header">Código</f:facet>
+						<h:outputText value="#{disciplina.cod_disciplina}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{disciplina.nome}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Alterar</f:facet>
+						<h:commandLink value="altera" action="#{disciplinaBean.carregar(disciplina)}"/>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Remover</f:facet>
+						<h:commandLink value="remove" action="#{disciplinaBean.remover(disciplina)}"/>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		
+	</h:body>
+</html>

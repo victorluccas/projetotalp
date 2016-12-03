@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:body>
+	    <h1>Cadastrar Aluno</h1>
+		<h:form  id="aluno">
+			<fieldset>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="id: " for="id" style="display:none;"/>
+					<h:inputText id="id" value="#{alunoBean.aluno.id}" style="display:none;"/>
+					<h:outputLabel value="Nome: " for="nome"/>
+					<h:inputText id="nome" value="#{alunoBean.aluno.nome}"/>
+					<h:outputLabel value="Matrícula: " for="matricula"/>
+					<h:inputText id="matricula" value="#{alunoBean.aluno.matricula}" />
+					
+					<h:commandButton value="Enviar" action="#{alunoBean.gravarAluno}" />
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+		
+		<h:form id="formTabelaAlunos">
+				<h:dataTable value="#{alunoBean.alunos}" var="aluno" id="tabelaAlunos">
+					<h:column>
+						<f:facet name="header">Matrícula</f:facet>
+						<h:outputText value="#{aluno.matricula}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{aluno.nome}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Alterar</f:facet>
+						<h:commandLink value="altera" action="#{alunoBean.carregar(aluno)}"/>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Remover</f:facet>
+						<h:commandLink value="remove" action="#{alunoBean.remover(aluno)}"/>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		
+	</h:body>
+</html>
